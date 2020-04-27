@@ -1,0 +1,12 @@
+name: Lint and Test code
+on: push
+
+jobs:
+  nox:
+    name: nox
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: excitedleigh/setup-nox@0.1.0
+      - run: nox -k "not format"
