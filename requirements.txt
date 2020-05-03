@@ -12,10 +12,11 @@ distlib==0.3.0
 entrypoints==0.3
 filelock==3.0.12
 flake8==3.7.9
-flake8-import-order==0.18.1
+flake8-isort==3.0.0
 Flask==1.1.2
 Flask-Alembic==2.0.1
 Flask-Dance==3.0.0
+Flask-JWT-Extended==3.24.1
 Flask-SQLAlchemy==2.4.1
 idna==2.9
 isort==4.3.21
@@ -33,6 +34,7 @@ psycopg2-binary==2.8.5
 py==1.8.1
 pycodestyle==2.5.0
 pyflakes==2.1.1
+PyJWT==1.7.1
 python-dateutil==2.8.1
 python-dotenv==0.13.0
 python-editor==1.0.4
@@ -40,7 +42,9 @@ regex==2020.4.4
 requests==2.23.0
 requests-oauthlib==1.3.0
 six==1.14.0
+spotipy==2.12.0
 SQLAlchemy==1.3.16
+testfixtures==6.14.1
 toml==0.10.0
 typed-ast==1.4.1
 typing-extensions==3.7.4.2

@@ -8,7 +8,7 @@ PACKAGE_FILES = [PACKAGE_NAME, "noxfile.py"]
 @nox.session(python="3.8")
 def lint(session: nox.sessions.Session) -> None:
     session.install(
-        "flake8==3.7.9", "flake8-import-order==0.18.1", "black==19.10b0", "mypy==0.770"
+        "flake8==3.7.9", "flake8-isort==3.0.0", "black==19.10b0", "mypy==0.770"
     )
     session.run("flake8", *PACKAGE_FILES)
     session.run("black", "--check", *PACKAGE_FILES)

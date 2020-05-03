@@ -1,5 +1,5 @@
 import logging
-from typing import Any
+from typing import Any, cast
 
 from flask import Blueprint, jsonify, session
 from flask_dance.consumer import oauth_authorized
@@ -19,13 +19,15 @@ auth_api = Blueprint("auth", __name__)
 @auth_api.route("/")
 @login_required(should_redirect=True)
 def index_route() -> Any:
-    return jsonify(username=current_user.username)
+    user = cast(User, current_user)
+    return jsonify(username=user.username)
 
 
 @auth_api.route("/jwt")
 @login_required()
 def generate_jwt() -> Any:
-    return jsonify(token=create_access_token(identity=current_user.username))
+    user = cast(User, current_user)
+    return jsonify(token=create_access_token(identity=user.username))
 
 
 @oauth_authorized.connect

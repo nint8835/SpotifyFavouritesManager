@@ -5,6 +5,7 @@ from flask import Flask
 from flask_dance.contrib.spotify import make_spotify_blueprint
 
 from . import alembic, db, jwt_manager
+from .utils.spotify import SPOTIFY_SCOPES
 from .views.auth import auth_api
 
 app = Flask(__name__)
@@ -18,11 +19,6 @@ jwt_manager.init_app(app)
 
 app.register_blueprint(auth_api)
 
-SPOTIFY_SCOPES = [
-    "user-read-playback-state",
-    "playlist-modify-private",
-    "playlist-read-private",
-]
 
 spotify_blueprint = make_spotify_blueprint(
     client_id=app.config["SPOTIFY_CLIENT_ID"],
