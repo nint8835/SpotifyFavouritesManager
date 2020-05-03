@@ -10,3 +10,4 @@ class DEVELOPMENT(COMMON):
     SQLALCHEMY_DATABASE_URI = "postgresql://sfm:password@localhost:5432/sfm_dev"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "this key isn't secret"
+    JWT_SECRET_KEY = "this key, likewise, isn't secret"

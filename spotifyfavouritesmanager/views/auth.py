@@ -1,12 +1,14 @@
 import logging
 from typing import Any
 
-from flask import Blueprint, jsonify, redirect, session, url_for
+from flask import Blueprint, jsonify, session
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.spotify import spotify
+from flask_jwt_extended import create_access_token
 
 from .. import db
 from ..models.user import User
+from ..utils.auth import current_user, login_required
 from ..utils.types import TokenDetails
 
 logger = logging.getLogger(__name__)
@@ -15,14 +17,15 @@ auth_api = Blueprint("auth", __name__)
 
 
 @auth_api.route("/")
-def auth_begin_route() -> Any:
-    if "spotify_username" not in session:
-        return redirect(url_for("spotify.login"))
-    else:
-        current_user = User.get_by_username(session["spotify_username"])
-        if current_user is None:
-            return redirect(url_for("spotify.login"))
-        return jsonify(username=current_user.username, token=current_user.token_data)
+@login_required(should_redirect=True)
+def index_route() -> Any:
+    return jsonify(username=current_user.username)
+
+
+@auth_api.route("/jwt")
+@login_required()
+def generate_jwt() -> Any:
+    return jsonify(token=create_access_token(identity=current_user.username))
 
 
 @oauth_authorized.connect
