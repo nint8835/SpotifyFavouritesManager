@@ -7,6 +7,7 @@ from flask_dance.contrib.spotify import make_spotify_blueprint
 from . import alembic, db, jwt_manager
 from .utils.spotify import SPOTIFY_SCOPES
 from .views.auth import auth_api
+from .views.testing import testing_api
 
 app = Flask(__name__)
 load_dotenv()
@@ -18,7 +19,7 @@ alembic.init_app(app)
 jwt_manager.init_app(app)
 
 app.register_blueprint(auth_api)
-
+app.register_blueprint(testing_api)
 
 spotify_blueprint = make_spotify_blueprint(
     client_id=app.config["SPOTIFY_CLIENT_ID"],
