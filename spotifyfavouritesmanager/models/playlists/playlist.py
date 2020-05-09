@@ -1,3 +1,5 @@
+from typing import Optional, Type
+
 from ... import db
 
 
@@ -14,3 +16,9 @@ class Playlist(db.Model):
         "polymorphic_identity": "playlist",
         "polymorphic_on": playlist_type,
     }
+
+    @classmethod
+    def get_by_spotify_id(
+        cls: Type["Playlist"], spotify_id: str
+    ) -> Optional["Playlist"]:
+        return cls.query.filter_by(spotify_id=spotify_id).first()

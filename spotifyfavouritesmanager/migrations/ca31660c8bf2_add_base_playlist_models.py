@@ -29,7 +29,7 @@ def upgrade() -> None:
     op.create_table(
         "monthly_playlist",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("month", sa.Integer(), nullable=False),
+        sa.Column("month", sa.Text(), nullable=False),
         sa.Column("year", sa.Integer(), nullable=False),
         sa.ForeignKeyConstraint(["id"], ["playlist.id"],),
         sa.PrimaryKeyConstraint("id"),
