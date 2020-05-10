@@ -2,6 +2,14 @@ from typing import Optional, Type
 
 from ... import db
 
+TRACKS_TABLE = db.Table(
+    "playlist_tracks",
+    db.Column("track_id", db.Integer, db.ForeignKey("track.id"), primary_key=True),
+    db.Column(
+        "playlist_id", db.Integer, db.ForeignKey("playlist.id"), primary_key=True
+    ),
+)
+
 
 class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -11,6 +19,13 @@ class Playlist(db.Model):
 
     owner_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     owner = db.relationship("User")
+
+    tracks = db.relationship(
+        "Track",
+        secondary=TRACKS_TABLE,
+        lazy="subquery",
+        backref=db.backref("tracks", lazy=True),
+    )
 
     __mapper_args__ = {
         "polymorphic_identity": "playlist",
