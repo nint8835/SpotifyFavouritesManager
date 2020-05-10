@@ -6,8 +6,8 @@ from ..utils.types import TokenDetails
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Text)
-    token_data = db.Column(db.JSON)
+    username = db.Column(db.Text, nullable=False)
+    token_data = db.Column(db.JSON, nullable=False)
 
     @classmethod
     def add(
