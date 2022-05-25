@@ -34,7 +34,7 @@ psycopg2-binary==2.8.5
 py==1.10.0
 pycodestyle==2.5.0
 pyflakes==2.1.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 python-dateutil==2.8.1
 python-dotenv==0.13.0
 python-editor==1.0.4
